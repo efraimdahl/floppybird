@@ -31,6 +31,7 @@ var soundScore = new buzz.sound("assets/sounds/sfx_point.ogg");
 var soundHit = new buzz.sound("assets/sounds/sfx_hit.ogg");
 var soundDie = new buzz.sound("assets/sounds/sfx_die.ogg");
 var soundSwoosh = new buzz.sound("assets/sounds/sfx_swooshing.ogg");
+var backgroundMusic = new Audio("assets/sounds/DreamyMusic.mp3");
 buzz.all().setVolume(volume);
 
 //loops
@@ -143,7 +144,7 @@ function gameloop() {
    //update the player speed/position
    velocity += gravity;
    position += velocity;
-
+   backgroundMusic.play();
    //update the player
    updatePlayer(player);
 
@@ -230,6 +231,22 @@ function gameloop() {
       //and score a point
       playerScore();
    }
+}
+
+//Control functions
+function toggleLiveInput() {
+   getUserMedia(
+      {
+           "audio": {
+               "mandatory": {
+                   "googEchoCancellation": "true",
+                   "googAutoGainControl": "true",
+                   "googNoiseSuppression": "true",
+                   "googHighpassFilter": "true"
+               },
+               "optional": []
+           },
+       }, gotStream);
 }
 
 //Handle space bar
