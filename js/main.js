@@ -18,7 +18,7 @@ var flyArea = $("#flyarea").height();
 var score = 0;
 var highscore = 0;
 
-var pipeheight = 90;
+var pipeheight = 150;
 var pipewidth = 52;
 var pipes = new Array();
 
@@ -48,8 +48,8 @@ $(document).ready(function() {
    var savedscore = getCookie("highscore");
    if(savedscore != "")
       highscore = parseInt(savedscore);
-
    //start with the splash screen
+   //toggleLiveInput();
    showSplash();
 });
 
@@ -144,7 +144,7 @@ function gameloop() {
    //update the player speed/position
    velocity += gravity;
    position += velocity;
-   backgroundMusic.play();
+   //backgroundbackgroundMusic.play();
    //update the player
    updatePlayer(player);
 
@@ -233,21 +233,6 @@ function gameloop() {
    }
 }
 
-//Control functions
-function toggleLiveInput() {
-   getUserMedia(
-      {
-           "audio": {
-               "mandatory": {
-                   "googEchoCancellation": "true",
-                   "googAutoGainControl": "true",
-                   "googNoiseSuppression": "true",
-                   "googHighpassFilter": "true"
-               },
-               "optional": []
-           },
-       }, gotStream);
-}
 
 //Handle space bar
 $(document).keydown(function(e){
