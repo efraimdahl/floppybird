@@ -17,7 +17,7 @@ For the audio grabbing I used a html5 Volume meter: (find it here: https://githu
 
 Enjoy.
 
-https://efraimdahl.github.io/floppybird// (or play [**easy mode**](https://nebez.github.io/floppybird/?easy))
+https://efraimdahl.github.io/floppybird
 
 
 ### Notice
