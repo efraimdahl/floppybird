@@ -18,7 +18,7 @@ var flyArea = $("#flyarea").height();
 var score = 0;
 var highscore = 0;
 
-var pipeheight = 150;
+var pipeheight = 300;
 var pipewidth = 52;
 var pipes = new Array();
 
@@ -127,6 +127,7 @@ function startGame()
 
    //jump from the start!
    playerJump();
+   playerJump();
 }
 
 function updatePlayer(player)
@@ -231,6 +232,10 @@ function gameloop() {
       //and score a point
       playerScore();
    }
+   if (meter.checkClipping()){
+      playerJump();
+   }
+   
 }
 
 
