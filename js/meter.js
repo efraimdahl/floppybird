@@ -27,12 +27,17 @@ var canvasContext = null;
 var WIDTH=500;
 var HEIGHT=50;
 var rafID = null;
+var constant = 100;
+var slider = document.getElementById("myRange");
+var output = document.getElementById("f");
+ // Display the default slider value
+
 
 window.onload = function() {
 
     // grab our canvas
 	canvasContext = document.getElementById( "meter" ).getContext("2d");
-	
+    
     // monkeypatch Web Audio
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	
@@ -48,6 +53,7 @@ window.onload = function() {
         	navigator.mozGetUserMedia;
 
         // ask for an audio input
+        alert("Welcome to TalkyBird.\n 1)You will have to enable your microphone, otherwise the game will not work.\n 2) If the input does not work, try adjusting with the fader to your right.\n 3)It should flash red on loud noises. Those will be what make the bird jump. \n4)Mouse, Touch, and Space bar input will work (and you will have to use it untill we get microphone input) for the first 5 seconds\n 5)Then its hands off only, rember this is not only about getting a high score but about performance\n 6)HAVE FUN!");
         navigator.getUserMedia(
         {
             "audio": {
@@ -61,15 +67,20 @@ window.onload = function() {
             },
         }, gotStream, didntGetStream);
     } catch (e) {
-        alert('getUserMedia threw exception :' + e);
+        alert('Could not get Microphone Input. Try using a different browser :' + e);
     }
-
 }
 
 
 function didntGetStream() {
     alert('Stream generation failed.');
 }
+
+//Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    constant = this.value;
+    output.innerHTML = this.value;
+  } 
 
 var mediaStreamSource = null;
 

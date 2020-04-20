@@ -30,9 +30,12 @@
                   <div id="player" class="bird animated"></div>
 
                   <div id="bigscore"></div>
-                  <div id="bluebox"><p>This is a meter for your reference</p><canvas id="meter" width="300" height="30"></canvas>
+                  <div id="bluebox"><p>This is a meter. Adjust mic sensitivity below untill it flashes red</p>
+                     <span id = "thisismytime">0</span><canvas id="meter" width="300" height="30"></canvas><div class="slidecontainer">
+                     <input type="range" min="0" max="1000" value="100" class="slider" id="myRange">
+                     <span id="f" style="font-weight:bold;color:red">100</span>
+                   </div>
                   </div>
-                  <div id="clipping"></div>
                   <div id="splash"></div>
 
                   <div id="scoreboard">
@@ -60,7 +63,9 @@
       <script src="js/jquery.min.js"></script>
       <script src="js/jquery.transit.min.js"></script>
       <script src="js/buzz.min.js"></script>
-      <script src="js/main.js"></script>
+      <script src="js/timer.js"></script>
       <script src="js/meter.js"></script>
+      <script src="js/main.js"></script>
+      
    </body>
 </html>

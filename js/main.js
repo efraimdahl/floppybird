@@ -24,6 +24,12 @@ var pipes = new Array();
 
 var replayclickable = false;
 
+var ticker = 0;
+var smalltock = 10000;
+var mytime = document.getElementById("thisismytime");
+var smalltime = document.getElementById("smalltime");
+
+
 //sounds
 var volume = 30;
 var soundJump = new buzz.sound("assets/sounds/sfx_wing.ogg");
@@ -37,6 +43,8 @@ buzz.all().setVolume(volume);
 //loops
 var loopGameloop;
 var loopPipeloop;
+var tickerloop;
+var smalltockloop;
 
 $(document).ready(function() {
    if(window.location.search == "?debug")
@@ -104,6 +112,8 @@ function showSplash()
 
 function startGame()
 {
+   //start timer
+   smalltock = 10000;
    currentstate = states.GameScreen;
 
    //fade out the splash
@@ -124,10 +134,14 @@ function startGame()
    var updaterate = 1000.0 / 60.0 ; //60 times a second
    loopGameloop = setInterval(gameloop, updaterate);
    loopPipeloop = setInterval(updatePipes, 1400);
-
+   
+   ticker = 0
+   tickerloop = setInterval(ticktock,1000);
+   
    //jump from the start!
    playerJump();
    playerJump();
+   
 }
 
 function updatePlayer(player)
@@ -233,11 +247,25 @@ function gameloop() {
       playerScore();
    }
    if (meter.checkClipping()){
+      
+      if(smalltock > 2){
       playerJump();
+      }
+
    }
    
 }
 
+function ticktock(){
+   ticker++;
+   mytime.innerHTML = ticker;
+
+}
+
+function smalltocks(){
+   smalltock++;
+   //smalltime.innerHTML = smalltock;
+}
 
 //Handle space bar
 $(document).keydown(function(e){
@@ -261,8 +289,9 @@ else
 function screenClick()
 {
    if(currentstate == states.GameScreen)
-   {
+   {  if(ticker<6){
       playerJump();
+   }
    }
    else if(currentstate == states.SplashScreen)
    {
@@ -276,6 +305,9 @@ function playerJump()
    //play jump sound
    soundJump.stop();
    soundJump.play();
+   smalltock = 0;
+   smalltockloop = setInterval(smalltocks,800);
+
 }
 
 function setBigScore(erase)

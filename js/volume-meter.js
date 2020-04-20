@@ -24,6 +24,8 @@ SOFTWARE.
 
 /*
 
+
+
 Usage:
 audioNode = createAudioMeter(audioContext,clipLevel,averaging,clipLag);
 
@@ -38,14 +40,15 @@ clipLag: how long you would like the "clipping" indicator to show
 Access the clipping through node.checkClipping(); use node.shutdown to get rid of it.
 */
 
+
 function createAudioMeter(audioContext,clipLevel,averaging,clipLag) {
 	var processor = audioContext.createScriptProcessor(512);
 	processor.onaudioprocess = volumeAudioProcess;
 	processor.clipping = false;
 	processor.lastClip = 0;
 	processor.volume = 0;
-	processor.clipLevel = clipLevel || 0.2;
-	processor.averaging = averaging || 0.30;
+	processor.clipLevel = clipLevel || 0.5;
+	processor.averaging = averaging || 0.70;
 	processor.clipLag = clipLag || 500;
 
 	// this will have no effect, since we don't copy the input to the output,
@@ -78,7 +81,7 @@ function volumeAudioProcess( event ) {
 
 	// Do a root-mean-square on the samples: sum up the squares...
     for (var i=0; i<bufLength; i++) {
-    	x = buf[i];
+    	x = buf[i]*constant/100;
     	if (Math.abs(x)>=this.clipLevel) {
     		this.clipping = true;
     		this.lastClip = window.performance.now();
@@ -92,5 +95,8 @@ function volumeAudioProcess( event ) {
     // Now smooth this out with the averaging factor applied
     // to the previous sample - take the max here because we
     // want "fast attack, slow release."
-    this.volume = Math.max(rms, this.volume*this.averaging);
+	this.volume = Math.max(rms, this.volume*this.averaging);
+	if(this.volume>=this.clipLevel*2){
+		this.volume = this.clipLevel*2
+	}
 }
