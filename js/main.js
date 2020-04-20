@@ -12,7 +12,7 @@ var gravity = 0.25;
 var velocity = 0;
 var position = 180;
 var rotation = 0;
-var jump = -4.6;
+var jump = -2.6;
 var flyArea = $("#flyarea").height();
 
 var score = 0;
@@ -248,8 +248,11 @@ function gameloop() {
    }
    if (meter.checkClipping()){
       
-      if(smalltock > 2){
+      if(smalltock > 3){
       playerJump();
+      smalltock = 0;
+      smalltockloop = setInterval(smalltocks,100);
+      
       }
 
    }
@@ -305,9 +308,7 @@ function playerJump()
    //play jump sound
    soundJump.stop();
    soundJump.play();
-   smalltock = 0;
-   smalltockloop = setInterval(smalltocks,800);
-
+  
 }
 
 function setBigScore(erase)
