@@ -39,7 +39,7 @@ window.onload = function() {
 	canvasContext = document.getElementById( "meter" ).getContext("2d");
     
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
+    alert("WELCOME TO CHATTY BIRD\nSTEP 1) Use Firefox (it wont work otherwise)\n STEP 2) Use the fader to the right to adjust microphone sensitivity\nSTEP 3) Make sure that the Bar flashes red. Red flashes will make the bird fly\n STEP 4) RIght when the game starts you will have to use the space-bar/mouseclicks/touch for a few seconds\n STEP 5) Then the bird will listen only to noises you make (other inputs will be useless)\n HAVE FUN")
     // Attempt to get audio input
     try {
         // monkeypatch getUserMedia
