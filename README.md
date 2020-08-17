@@ -4,6 +4,7 @@
 
 Floppy bird reconfigured to take microphone input.
 The microphone input will only grab once the you have clicked a few times... So before the Pipes start, you should use the mouse or the space bar. Then its hands off time.
+Currently only supported on firefox.
 
 Used Nebez Briefkani browser rebuild of Floppy Bird as a basis (find it here: https://github.com/nebez/floppybird)
 For the audio grabbing I used a html5 Volume meter: (find it here: https://github.com/cwilso/volume-meter)
